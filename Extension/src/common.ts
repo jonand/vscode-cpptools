@@ -151,14 +151,14 @@ export function resolveVariables(input: string): string {
     let regexp: RegExp = /\$\{(env:|env.)?(.*?)\}/g;
     let ret: string = input.replace(regexp, (match: string, ignored: string, name: string) => {
         let newValue: string = process.env[name];
-        return (newValue != null) ? newValue : match;
+        return (newValue !== null) ? newValue : match;
     });
 
     // Resolve '~' at the start of the path.
     regexp = /^\~/g;
     ret = ret.replace(regexp, (match: string, name: string) => {
         let newValue: string = process.env.HOME;
-        return (newValue != null) ? newValue : match;
+        return (newValue !== null) ? newValue : match;
     });
 
     return ret;
@@ -176,9 +176,9 @@ export function asFolder(uri: vscode.Uri): string {
  * get the default open command for the current platform
  */
 export function getOpenCommand(): string {
-    if (os.platform() == 'win32') {
+    if (os.platform() === 'win32') {
         return 'explorer';
-    } else if (os.platform() == 'darwin') {
+    } else if (os.platform() === 'darwin') {
         return '/usr/bin/open';
     } else {
         return '/usr/bin/xdg-open';
@@ -405,7 +405,7 @@ export function spawnChildProcess(process: string, args: string[], workingDirect
 let outputChannel: vscode.OutputChannel;
 
 export function getOutputChannel(): vscode.OutputChannel {
-    if (outputChannel == undefined) {
+    if (outputChannel === undefined) {
         outputChannel = vscode.window.createOutputChannel("C/C++");
     }
     return outputChannel;
@@ -413,7 +413,7 @@ export function getOutputChannel(): vscode.OutputChannel {
 
 export function allowExecution(file: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        if (process.platform != 'win32') {
+        if (process.platform !== 'win32') {
             checkFileExists(file).then((exists: boolean) => {
                 if (exists) {
                     fs.chmod(file, '755', (err: NodeJS.ErrnoException) => {

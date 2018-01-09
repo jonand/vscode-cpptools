@@ -62,7 +62,7 @@ function findCppToolsExtensionDebugAdapterFolder(): string {
             }
         }
 
-        if (dirPath == os.homedir()) {
+        if (dirPath === os.homedir()) {
             console.error("Could not find installed C/C++ extension.");
             return null;
         }
@@ -80,7 +80,7 @@ function enableDevWorkflow(): Boolean {
         return false;
     }
 
-    return (EnableDevWorkflow || (process.env.CPPTOOLS_DEV != null));
+    return (EnableDevWorkflow || (process.env.CPPTOOLS_DEV !== null));
 }
 
 function copySourceDependencies(): void {

@@ -11,6 +11,7 @@
 * Performance improvements with `browse.path` parsing, and stop showing "Parsing files" when there's no actual parsing. [#1393](https://github.com/Microsoft/vscode-cpptools/issues/1393)
 * Fix crash when settings with the wrong type are used. [#1396](https://github.com/Microsoft/vscode-cpptools/issues/1396)
 * Allow semicolons in `browse.path`. [#1415](https://github.com/Microsoft/vscode-cpptools/issues/1415)
+* Fix files with relative paths not opening from the debugger call stack. [#1228](https://github.com/Microsoft/vscode-cpptools/issues/1228)
 * Add `C_Cpp.workspaceParsingPriority` setting to avoid using 100% CPU during parsing of workspace files.
 * Add `C_Cpp.exclusionPolicy` default to `checkFolders` to avoid expensive `files.exclude` checking on every file.
 

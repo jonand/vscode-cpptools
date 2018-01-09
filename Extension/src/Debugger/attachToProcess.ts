@@ -84,7 +84,7 @@ export class RemoteAttachPicker {
 
     private getRemoteOSAndProcesses(pipeCmd: string): Promise<AttachItem[]> {
         // Commands to get OS and processes
-        const command: string = `bash -c 'uname && if [ $(uname) == "Linux" ] ; then ${PsProcessParser.psLinuxCommand} ; elif [ $(uname) == "Darwin" ] ; ` +
+        const command: string = `bash -c 'uname && if [ $(uname) === "Linux" ] ; then ${PsProcessParser.psLinuxCommand} ; elif [ $(uname) === "Darwin" ] ; ` +
             `then ${PsProcessParser.psDarwinCommand}; fi'`;
 
         return execChildProcess(`${pipeCmd} "${command}"`, null, this._channel).then(output => {
@@ -92,34 +92,34 @@ export class RemoteAttachPicker {
             // Processess will follow if listed
             let lines: string[] = output.split(/\r?\n/);
 
-            if (lines.length == 0) {
+            if (lines.length === 0) {
                 return Promise.reject<AttachItem[]>(new Error("Pipe transport failed to get OS and processes."));
             } else {
                 let remoteOS: string = lines[0].replace(/[\r\n]+/g, '');
 
-                if (remoteOS != "Linux" && remoteOS != "Darwin") {
+                if (remoteOS !== "Linux" && remoteOS !== "Darwin") {
                     return Promise.reject<AttachItem[]>(new Error(`Operating system "${remoteOS}" not supported.`));
                 }
 
                 // Only got OS from uname
-                if (lines.length == 1) {
+                if (lines.length === 1) {
                     return Promise.reject<AttachItem[]>(new Error("Transport attach could not obtain processes list."));
                 } else {
                     let processes: string[] = lines.slice(1);
                     return PsProcessParser.ParseProcessFromPsArray(processes)
                         .sort((a, b) => {
-                            if (a.name == undefined) {
-                                if (b.name == undefined) {
+                            if (a.name === undefined) {
+                                if (b.name === undefined) {
                                     return 0;
                                 }
                                 return 1;
                             }
-                            if (b.name == undefined) {
+                            if (b.name === undefined) {
                                 return -1;
                             }
                             let aLower: string = a.name.toLowerCase();
                             let bLower: string = b.name.toLowerCase();
-                            if (aLower == bLower) {
+                            if (aLower === bLower) {
                                 return 0;
                             }
                             return aLower < bLower ? -1 : 1;

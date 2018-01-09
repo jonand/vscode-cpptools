@@ -14,7 +14,8 @@
         "promise-must-complete": true,
         "semicolon": true,
         "typedef": [true, "variable-declaration", "call-signature"],
-        "whitespace": [true, "check-branch", "check-operator", "check-separator", "check-preblock", "check-type"]
+        "whitespace": [true, "check-branch", "check-operator", "check-separator", "check-preblock", "check-type"],
+        "triple-equals": false
     },
     "rulesDirectory": ["node_modules/tslint-microsoft-contrib", "node_modules/tslint-no-unused-expression-chai/rules"]
 }
