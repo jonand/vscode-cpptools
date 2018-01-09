@@ -13,6 +13,7 @@
 * Allow semicolons in `browse.path`. [#1415](https://github.com/Microsoft/vscode-cpptools/issues/1415)
 * Add `C_Cpp.workspaceParsingPriority` setting to avoid using 100% CPU during parsing of workspace files.
 * Add `C_Cpp.exclusionPolicy` default to `checkFolders` to avoid expensive `files.exclude` checking on every file.
+* Fix to handle relative pathing in source file paths properly when normalizing. [#1228](https://github.com/Microsoft/vscode-cpptools/issues/1228)
 
 ## Version 0.14.5: December 18, 2017
 * Fix for stackwalk `NullReferenceException`. [#1339](https://github.com/Microsoft/vscode-cpptools/issues/1339)
